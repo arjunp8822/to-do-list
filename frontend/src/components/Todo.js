@@ -9,7 +9,7 @@ const Todo = (props) => {
             <div className='task-text-container'>
                 <InputBox status={props.status} />
                 <div className='task-text'>
-                    <h3>{props.task}</h3>
+                    <h3 className={props.status === 3 ? 'dash' : ''}>{props.task}</h3>
                 </div>
             </div>
             <div className='task-category-container'>

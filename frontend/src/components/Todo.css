@@ -4,7 +4,7 @@
     display: flex;
     justify-content: space-between;
     padding: 20px 0;
-    border-bottom: 1px solid rgb(205, 205, 205);
+    border-bottom: 1px solid var(--light-grey);
 }
 
 .task-text-container {
@@ -39,6 +39,11 @@
     font-weight: 400;
     font-size: 18px;
     letter-spacing: 0.25px;
+}
+
+.dash {
+    text-decoration: line-through;
+    color: green;
 }
 
 @media (max-width: 768px) {

@@ -8,6 +8,7 @@
 
 :root {
     --red: #de483a;
+    --light-grey: rgb(205, 205, 205);
 }
 
 .App {
@@ -60,6 +61,9 @@ nav h1 {
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    background: rgba(0, 0, 0, 0.65);
+    background-blend-mode: darken;
+
 }
 
 .create-modal-inactive {
@@ -67,7 +71,6 @@ nav h1 {
 }
 
 .create-container {
-    border: 1px solid black;
     background-color: #fff;
     border-radius: 5px;
     width: 80%;
@@ -85,7 +88,7 @@ nav h1 {
     padding: 5px 10px;
     border-radius: 5px;
     margin-bottom: 10px;
-    border: 1px solid black;
+    border: 1px solid var(--red);
 }
 
 .new-description {
@@ -94,7 +97,7 @@ nav h1 {
     border-radius: 5px;
     height: 80%;
     margin-bottom: 10px;
-    border: 1px solid black;
+    border: 1px solid var(--red);
 }
 
 .create-buttons {
@@ -131,8 +134,8 @@ nav h1 {
 }
 
 .create-submit-button-container button {
-    background-color: blue;
-    border: 1px solid blue;
+    background-color: var(--red);
+    border: 1px solid var(--red);
     padding: 8px 20px;
     border-radius: 5px;
     font-size: 14px;
@@ -144,12 +147,12 @@ nav h1 {
 }
 
 .button-active {
-    background-color: #fff;
-    border: 2px solid blue;
+    background-color: var(--red);
+    border: 1px solid var(--red);
     padding: 5px 10px;
     border-radius: 5px;
     font-size: 12px;
-    color: blue;
+    color: #fff;
 }
 
 .button-inactive {
@@ -172,7 +175,7 @@ nav h1 {
 
 .create-container-close-button {
     font-size: 25px;
-    color: blue;
+    color: var(--red);
 }
 
 .create-container-close-button:hover {
@@ -194,5 +197,28 @@ nav h1 {
 
     .container {
         padding: 40px 0;
+    }
+
+    .new-task {
+        margin-bottom: 10px;
+    }
+
+    .create-buttons {
+        margin-bottom: 15px;
+        flex-direction: column;
+        gap: 5px;
+        align-items: flex-start;
+    }
+
+    .create-category-buttons {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 2px;
+    }
+
+    .create-status-buttons {
+        flex-direction: row;
+        align-items: flex-end;
+        gap: 2px;
     }
 }
