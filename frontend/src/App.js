@@ -117,13 +117,17 @@ function App() {
         <div className="App">
           <nav>
             <h1>Tasks</h1>
-            <AiOutlinePlus onClick={() => setDisplayCreate(true)} />
-          </nav>
-          {data && data.map((item) => (
-            <div onClick={getHandler} id={item._id} >
-              <Todo task={item.task} id={item._id} />
+            <div className='nav-icon'>
+              <AiOutlinePlus onClick={() => setDisplayCreate(true)} />
             </div>
-          ))}
+          </nav>
+          <div className='container'>
+            {data && data.map((item) => (
+              <div onClick={getHandler} id={item._id} >
+                <Todo task={item.task} id={item._id} />
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* create modal */}
