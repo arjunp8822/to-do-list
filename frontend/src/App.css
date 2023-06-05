@@ -80,6 +80,9 @@
 
 .create-submit-button-container {
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
 }
 
 .create-submit-button-container button {
