@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import Todo from './components/Todo';
 
 function App() {
 
@@ -93,6 +94,11 @@ function App() {
           <input placeholder='Task' onChange={(e) => setNewTask(e.target.value)} />
           <button>Create</button>
         </form>
+        {data && data.map((item) => (
+          <div>
+            <Todo task={item.task} />
+          </div>
+        ))}
       </div>
     );
   }

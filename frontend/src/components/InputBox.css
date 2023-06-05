@@ -1,0 +1,55 @@
+.input-box {
+    height: 20px;
+    width: 20px;
+    background-color: red;
+    border-radius: 50%;
+    position: relative;
+}
+
+.input-box-selection {
+    position: absolute;
+    border: 1px solid black;
+    padding: 15px;
+    width: 150px;
+    top: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    z-index: 10;
+    border-radius: 5px;
+}
+
+.input-box:hover {
+    cursor: pointer;
+}
+
+.input-box-selection li {
+    font-size: 14px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+.input-box-circle {
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+}
+
+.ns {
+    background-color: red;
+}
+
+.s {
+    background-color: yellow;
+}
+
+.c {
+    background-color: green;
+}
+
+.hide {
+    display: none;
+}

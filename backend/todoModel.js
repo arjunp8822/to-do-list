@@ -6,9 +6,13 @@ const todoSchema = mongoose.Schema(
             type: String,
             required: true
         },
-        isComplete: {
-            type: Boolean,
-            default: false
+        status: {
+            type: Number,
+            default: 1
+        },
+        category: {
+            type: String,
+            enum: ['Personal', 'Study', 'Work']
         },
     },
     {
