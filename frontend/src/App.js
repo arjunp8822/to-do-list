@@ -23,7 +23,7 @@ function App() {
   useEffect(() => {
     setLoading(true)
     const fetchData = async () => {
-      const response = await fetch('http://localhost:5000/api/todos')
+      const response = await fetch('https://todolist-api-m8iq.onrender.com/api/todos')
       if (response) {
         const jsonData = await response.json()
         setData(jsonData)
@@ -45,7 +45,7 @@ function App() {
       'description': newDescription
     }
     try {
-      const post = await fetch('http://localhost:5000/api/todos', {
+      const post = await fetch('https://todolist-api-m8iq.onrender.com/api/todos', {
         method: 'POST',
         body: JSON.stringify(newTodo),
         headers: {
@@ -61,7 +61,7 @@ function App() {
 
   const getHandler = async (e) => {
     const id = await e.currentTarget.id
-    const post = await fetch(`http://localhost:5000/api/todos/${id}`)
+    const post = await fetch(`https://todolist-api-m8iq.onrender.com/api/todos/${id}`)
     const response = await post.json()
     setDisplayTodo(true)
     setUpdateTask(response.task)
@@ -75,7 +75,7 @@ function App() {
   const deleteHandler = async (e) => {
     try {
       e.preventDefault()
-      const deleteTodo = await fetch(`http://localhost:5000/api/todos/${deleteId}`, {
+      const deleteTodo = await fetch(`https://todolist-api-m8iq.onrender.com/api/todos/${deleteId}`, {
         method: 'DELETE'
       })
     } catch (e) {
@@ -94,7 +94,7 @@ function App() {
         'category': updateCategory,
         'description': updateDescription
       }
-      const updatedPost = await fetch(`http://localhost:5000/api/todos/${updateId}`, {
+      const updatedPost = await fetch(`https://todolist-api-m8iq.onrender.com/api/todos/${updateId}`, {
         method: 'PUT',
         body: JSON.stringify(updatedTodo),
         headers: {
@@ -109,7 +109,9 @@ function App() {
 
   if (loading) {
     return (
-      <div>Loading</div>
+      <div className='loader-container'>
+        <div class="loader"></div>
+      </div>
     )
   } else {
     return (
@@ -184,7 +186,6 @@ function App() {
             </div>
           </form>
         </div>
-
       </>
     );
   }
