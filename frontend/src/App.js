@@ -17,6 +17,8 @@ function App() {
   const [updateStatus, setUpdateStatus] = useState(null)
   const [updateCategory, setUpdateCategory] = useState(null)
   const [updateDescription, setUpdateDescription] = useState(null)
+  const [updateId, setUpdateId] = useState(null)
+  const [deleteId, setDeleteId] = useState(null)
 
   useEffect(() => {
     setLoading(true)
@@ -58,7 +60,7 @@ function App() {
   }
 
   const getHandler = async (e) => {
-    const id = e.currentTarget.id
+    const id = await e.currentTarget.id
     const post = await fetch(`http://localhost:5000/api/todos/${id}`)
     const response = await post.json()
     setDisplayTodo(true)
@@ -66,31 +68,33 @@ function App() {
     setUpdateStatus(response.status)
     setUpdateCategory(response.category)
     setUpdateDescription(response.description)
+    setUpdateId(response._id)
+    setDeleteId(response._id)
   }
 
   const deleteHandler = async (e) => {
     try {
-      const id = await e.target.value
-      const deleteTodo = await fetch(`http://localhost:5000/api/todos/${id}`, {
+      e.preventDefault()
+      const deleteTodo = await fetch(`http://localhost:5000/api/todos/${deleteId}`, {
         method: 'DELETE'
       })
     } catch (e) {
       console.log(e)
     }
     window.location.reload(false);
+
   }
 
   const updateHandler = async (e) => {
     e.preventDefault()
     try {
-      const id = await e.target.value
       const updatedTodo = {
         'task': updateTask,
         'status': updateStatus,
         'category': updateCategory,
         'description': updateDescription
       }
-      const updatedPost = await fetch(`http://localhost:5000/api/todos/${id}`, {
+      const updatedPost = await fetch(`http://localhost:5000/api/todos/${updateId}`, {
         method: 'PUT',
         body: JSON.stringify(updatedTodo),
         headers: {
@@ -171,7 +175,7 @@ function App() {
             </div>
             <textarea value={updateDescription} type='text' onChange={(e) => setUpdateDescription(e.target.value)} className='new-description' />
             <div className='create-submit-button-container'>
-              <button type='submit'>Update</button>
+              <button type='submit' >Update</button>
               <button type='submit' onClick={deleteHandler}>Delete</button>
             </div>
           </form>
