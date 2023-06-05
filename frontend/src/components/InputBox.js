@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './InputBox.css'
 
-const InputBox = () => {
+const InputBox = (props) => {
     const [status, setStatus] = useState(true)
     const [selectedStatus, setSelectedStatus] = useState(1)
     const clickHandler = () => {
@@ -13,12 +13,8 @@ const InputBox = () => {
         if (e.target.outerText === 'Complete') { setSelectedStatus(3) }
     }
     return (
-        <div className={selectedStatus === 1 ? 'input-box ns' : selectedStatus === 2 ? 'input-box s' : selectedStatus === 3 ? 'input-box c' : 'input-box ns'} onClick={clickHandler}>
-            <ul className={status ? 'hide' : 'input-box-selection'}>
-                <li className='not-started' value={1} onClick={selectHandler}><div className='input-box-circle ns'></div><p>Not Started</p></li>
-                <li className='started' value={2} onClick={selectHandler}><div className='input-box-circle s'></div><p>Started</p></li>
-                <li className='complete' value={3} onClick={selectHandler}><div className='input-box-circle c'></div><p>Complete</p></li>
-            </ul>
+        <div className={props.status === 1 ? 'input-box ns' : props.status === 2 ? 'input-box s' : props.status === 3 ? 'input-box c' : 'input-box ns'} onClick={clickHandler}>
+
         </div>
     )
 }

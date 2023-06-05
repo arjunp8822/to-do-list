@@ -124,7 +124,7 @@ function App() {
           <div className='container'>
             {data && data.map((item) => (
               <div onClick={getHandler} id={item._id} >
-                <Todo task={item.task} id={item._id} />
+                <Todo task={item.task} id={item._id} status={item.status} category={item.category} />
               </div>
             ))}
           </div>

@@ -30,17 +30,24 @@
 }
 
 .task-text h3 {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 400;
-    letter-spacing: 0.25px;
-}
-
-.task-text p {
-    font-size: 14px;
     letter-spacing: 0.25px;
 }
 
 .task-category-container h5 {
     font-weight: 400;
-    font-size: 16px;
+    font-size: 18px;
+    letter-spacing: 0.25px;
+}
+
+@media (max-width: 768px) {
+    .task-text h3 {
+        font-size: 14px;
+    }
+
+    .task-category-container h5 {
+        font-size: 14px;
+    }
+
 }
