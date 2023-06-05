@@ -14,6 +14,9 @@ const todoSchema = mongoose.Schema(
             type: String,
             enum: ['Personal', 'Study', 'Work']
         },
+        description: {
+            type: String
+        }
     },
     {
         timestamps: true

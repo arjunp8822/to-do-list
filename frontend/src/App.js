@@ -1,12 +1,40 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import Todo from './components/Todo';
+import { AiOutlinePlus, AiFillCloseCircle } from 'react-icons/ai'
 
 function App() {
 
   const [data, setData] = useState(null)
-  const [newTask, setNewTask] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [newTask, setNewTask] = useState(null)
+  const [newStatus, setNewStatus] = useState(null)
+  const [newCategory, setNewCategory] = useState(null)
+  const [newDescription, setNewDescription] = useState(null)
+  const [displayCreate, setDisplayCreate] = useState(false)
+
+  const submitHandler = async (e) => {
+    e.preventDefault()
+    const newTodo = {
+      'task': newTask,
+      'status': newStatus,
+      'category': newCategory,
+      'description': newDescription
+    }
+    try {
+      const post = await fetch('http://localhost:5000/api/todos', {
+        method: 'POST',
+        body: JSON.stringify(newTodo),
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+      setDisplayCreate(false)
+    } catch (e) {
+      console.log(e)
+    }
+    window.location.reload(false);
+  }
 
   useEffect(() => {
     setLoading(true)
@@ -23,25 +51,6 @@ function App() {
     }
     fetchData()
   }, [])
-
-  const submitHandler = async (e) => {
-    e.preventDefault()
-    const newTodo = {
-      'task': newTask
-    }
-    try {
-      const post = await fetch('http://localhost:5000/api/todos', {
-        method: 'POST',
-        body: JSON.stringify(newTodo),
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      })
-    } catch (e) {
-      console.log(e)
-    }
-    window.location.reload(false);
-  }
 
   const deleteHandler = async (e) => {
     try {
@@ -80,26 +89,45 @@ function App() {
     )
   } else {
     return (
-      <div className="App">
-        <div>
+      <>
+        <div className="App">
+          <nav>
+            <h1>Tasks</h1>
+            <AiOutlinePlus onClick={() => setDisplayCreate(true)} />
+          </nav>
           {data && data.map((item) => (
             <div>
-              <p>{item.task}</p>
-              <button onClick={updateHandler} value={item._id}>Change</button>
-              <button onClick={deleteHandler} value={item._id}>Delete</button>
+              <Todo task={item.task} />
             </div>
           ))}
         </div>
-        <form onSubmit={submitHandler}>
-          <input placeholder='Task' onChange={(e) => setNewTask(e.target.value)} />
-          <button>Create</button>
-        </form>
-        {data && data.map((item) => (
-          <div>
-            <Todo task={item.task} />
-          </div>
-        ))}
-      </div>
+
+        {/* create modal */}
+
+        <div className={displayCreate ? 'create-modal' : 'create-modal-inactive'}>
+          <form onSubmit={submitHandler} className='create-container'>
+            <div className='create-container-close-container'>
+              <AiFillCloseCircle className='create-container-close-button' onClick={() => setDisplayCreate(false)} />
+            </div>
+            <input placeholder='Task' type='text' onChange={(e) => setNewTask(e.target.value)} className='new-task' />
+            <div className='create-buttons'>
+              <div className='create-category-buttons'>
+                <button onClick={() => setNewCategory('Personal')} type='button' className={newCategory === 'Personal' ? 'button-active' : 'button-inactive'}>Personal</button>
+                <button onClick={() => setNewCategory('Study')} type='button' className={newCategory === 'Study' ? 'button-active' : 'button-inactive'}>Study</button>
+                <button onClick={() => setNewCategory('Work')} type='button' className={newCategory === 'Work' ? 'button-active' : 'button-inactive'}>Work</button>
+              </div>
+              <div className='create-status-buttons'>
+                <button onClick={() => setNewStatus(1)} type='button' className={newStatus === 1 ? 'button-active' : 'button-inactive'}>Not Started</button>
+                <button onClick={() => setNewStatus(2)} type='button' className={newStatus === 2 ? 'button-active' : 'button-inactive'}>Started</button>
+              </div>
+            </div>
+            <textarea placeholder='Description' type='text' onChange={(e) => setNewDescription(e.target.value)} className='new-description' />
+            <div className='create-submit-button-container'>
+              <button type='submit'>Create</button>
+            </div>
+          </form>
+        </div>
+      </>
     );
   }
 

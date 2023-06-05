@@ -41,7 +41,10 @@ app.post('/api/todos', async (req, res) => {
         )
     } else {
         const todoItem = await todo.create({
-            task: req.body.task
+            task: req.body.task,
+            status: req.body.status,
+            category: req.body.category,
+            description: req.body.description
         })
         res.json(
             { 'message': 'Todo created' }
